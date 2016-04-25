@@ -1,0 +1,115 @@
+/**
+ * In this scenario you will be working with a single data set.
+ * The Data set is an array of objects stored in a variable called films.
+ * if you look at films.js you can see the array.
+ * Each object in the array is a film that has a name and year of release. 
+ * 
+ * films is a global variable that you will have access to 
+ * inside your functions it does not have to be passed as an argument
+ * if your functions are written to pass in the array films 
+ * ensure that it is the last argument
+ * 
+ * Many of the questions will require you to finish the functions 
+ * that are prewritten,
+ * Add arguments when needed
+ * You will not need to invoke any of the functions yourself
+ * The Unit Tests should let you know when you got the function right
+ * 
+ * For Question 7 you will need to move everything over to 
+ * VSCode and build your angular app there.
+ * When you complete the app push it to your github and slack me with the url.
+ * 
+*/
+
+//Question 1 - Finish the function called filmCount so it will return the total number of films in the array
+function filmCount(){
+  var totalFilms = 0;
+  for (var i = 0; i < films.length; i++){
+    totalFilms ++;
+  }
+  return totalFilms;
+}
+
+//Question 2 - Find film by Title, be sure to return the entire film object 
+function findTitle(title){
+  for (var i = 0; i < films.length; i++){
+    if (title === films[i].name){
+      return films[i];
+    }
+  }
+}
+
+//Question 3 - Add each of the movies in the newFilms array to the films array
+var newFilms = [{
+  name: 'Tangled',
+  year: 2010
+},{
+  name: 'Aladdin',
+  year: 1992
+},{
+  name: 'Zootopia',
+  year: 2016
+},{
+  name: 'The Little Mermaid',
+  year: 1989
+},{
+  name: 'Beauty and the Beast',
+  year: 1991
+}];
+
+function addNewFilms(newFilms, films){
+  for (var i = 0; i < newFilms.length; i++){
+    films.push(newFilms[i]);
+  }
+}
+
+//Question 4 - Remove any duplicate titles found in the films array by name
+function removeDups(){
+  var temp = 0;
+  for (var i = 0; i < films.length; i++){
+    for (var j = i+1; j < films.length; j++){
+      if (films[i].name === films[j].name){
+        temp = films.indexOf(films[i]);
+        films.splice(temp, 1);
+        j--;
+      }
+    }
+  }
+}
+
+//Question 5 - Find All films within a starting year and ending year
+function findReleasesWithin(a, b, films){
+  var results = [];
+  for (var i = 0; i < films.length; i++){
+    if ((films[i].year >= a) && (films[i].year <= b))
+    results.push(films[i]);
+  }
+  return results;
+}
+
+
+//BONUS QUESTION - Arrange the films array from oldest to newest 
+function sortByYear(property) 
+{
+  return function (a,b) 
+    {
+        if (a[property] < b[property])
+        {
+            return -1;
+        } 
+        else if (a[property] > b[property])
+        {
+            return 1;
+        } 
+        else 
+        {
+            return 0;
+        }
+    };
+}
+
+films.sort(sortByYear("year"));
+//Question 7 - Using the films array build an angular app
+//that will let you manage adding and removing films with a view
+
+films
